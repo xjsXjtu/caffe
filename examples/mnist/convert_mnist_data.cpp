@@ -28,6 +28,7 @@
 
 using namespace caffe;  // NOLINT(build/namespaces)
 using std::string;
+namespace gflags = google;
 
 DEFINE_string(backend, "lmdb", "The backend for storing the result");
 

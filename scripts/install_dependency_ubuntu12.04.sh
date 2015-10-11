@@ -13,7 +13,7 @@ wget https://github.com/schuhschuh/gflags/archive/master.zip
 unzip master.zip
 cd gflags-master
 mkdir build && cd build
-export CXXFLAGS="-fPIC" && cmake .. && make VERBOSE=1
+export CXXFLAGS="-fPIC" && cmake .. -DGFLAGS_NAMESPACE=google && make VERBOSE=1
 eval make && sudo make install || exit -1
 cd ../../
 
@@ -24,4 +24,4 @@ eval make && sudo make install || exit -1
 cd -
 
 # remove all temp files and dir
-cd .. && rm -rf temp
+# cd .. && rm -rf temp

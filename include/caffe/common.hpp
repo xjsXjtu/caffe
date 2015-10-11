@@ -23,7 +23,8 @@
 // 2.1. If yes, we will add a temporary solution to redirect the namespace.
 // TODO(Yangqing): Once gflags solves the problem in a more elegant way, let's
 // remove the following hack.
-#ifndef GFLAGS_GFLAGS_H_
+#if 1 // ndef GFLAGS_GFLAGS_H_
+// #error "namespace gflags is replaced with google"
 namespace gflags = google;
 #endif  // GFLAGS_GFLAGS_H_
 
