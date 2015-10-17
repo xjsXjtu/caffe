@@ -47,6 +47,7 @@ layer {
 #    mean_value: 123
 #    mirror: true
 #  }
+# Why the "top" is always pointing to itself, rather than the next layer?
   data_param {
     source: "examples/imagenet/ilsvrc12_val_lmdb"
     batch_size: 50
