@@ -2,16 +2,24 @@
 # Create the imagenet lmdb inputs
 # N.B. set the path to the imagenet train + val data dirs
 
+if [ $# -ne 1 ] ; then 
+    echo "./create_imagenet.sh num"
+    echo "    num: "
+    echo "         1 : create lmdb for training set."
+    echo "         2 : create lmdb for validation set."
+    exit 1
+fi
+
 EXAMPLE=examples/imagenet
 DATA=data/ilsvrc12
 TOOLS=build/tools
 
-TRAIN_DATA_ROOT=/path/to/imagenet/train/
-VAL_DATA_ROOT=/path/to/imagenet/val/
+TRAIN_DATA_ROOT=/mnt/hgfs/ILSVRC2012/ILSVRC2012_img_train/
+VAL_DATA_ROOT=/mnt/hgfs/ILSVRC2012/ILSVRC2012_img_val/
 
 # Set RESIZE=true to resize the images to 256x256. Leave as false if images have
 # already been resized using another tool.
-RESIZE=false
+RESIZE=true
 if $RESIZE; then
   RESIZE_HEIGHT=256
   RESIZE_WIDTH=256
@@ -34,24 +42,30 @@ if [ ! -d "$VAL_DATA_ROOT" ]; then
   exit 1
 fi
 
-echo "Creating train lmdb..."
 
-GLOG_logtostderr=1 $TOOLS/convert_imageset \
-    --resize_height=$RESIZE_HEIGHT \
-    --resize_width=$RESIZE_WIDTH \
-    --shuffle \
-    $TRAIN_DATA_ROOT \
-    $DATA/train.txt \
-    $EXAMPLE/ilsvrc12_train_lmdb
+if [ $1 -eq 1 ]; then
+    echo "Creating train lmdb..."
 
-echo "Creating val lmdb..."
+    GLOG_logtostderr=1 $TOOLS/convert_imageset \
+        --resize_height=$RESIZE_HEIGHT \
+        --resize_width=$RESIZE_WIDTH \
+        --shuffle \
+        $TRAIN_DATA_ROOT \
+        $DATA/train.txt \
+        $EXAMPLE/ilsvrc12_train_lmdb
+fi
 
-GLOG_logtostderr=1 $TOOLS/convert_imageset \
-    --resize_height=$RESIZE_HEIGHT \
-    --resize_width=$RESIZE_WIDTH \
-    --shuffle \
-    $VAL_DATA_ROOT \
-    $DATA/val.txt \
-    $EXAMPLE/ilsvrc12_val_lmdb
+
+if [ $1 -eq 2 ]; then
+    echo "Creating val lmdb..."
+
+    GLOG_logtostderr=1 $TOOLS/convert_imageset \
+        --resize_height=$RESIZE_HEIGHT \
+        --resize_width=$RESIZE_WIDTH \
+        --shuffle \
+        $VAL_DATA_ROOT \
+        $DATA/val.txt \
+        $EXAMPLE/ilsvrc12_val_lmdb
+fi
 
 echo "Done."

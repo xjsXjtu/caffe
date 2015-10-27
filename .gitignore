@@ -28,6 +28,7 @@
 
 # IPython notebook checkpoints
 .ipynb_checkpoints
+*.ipynb
 
 # Editor temporaries
 *.swp

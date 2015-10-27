@@ -82,7 +82,7 @@ class BasePrefetchingDataLayer :
   virtual void load_batch(Batch<Dtype>* batch) = 0;
 
   Batch<Dtype> prefetch_[PREFETCH_COUNT];
-  BlockingQueue<Batch<Dtype>*> prefetch_free_;
+  BlockingQueue<Batch<Dtype>*> prefetch_free_; // jxion: For what of prefetch_full[free]_ ???
   BlockingQueue<Batch<Dtype>*> prefetch_full_;
 
   Blob<Dtype> transformed_data_;

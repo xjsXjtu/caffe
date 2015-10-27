@@ -42,24 +42,26 @@ layer {
   type: "Convolution"
   bottom: "data"
   top: "conv1"
+  # learning rate and decay multipliers for the filters
   param {
     lr_mult: 1
     decay_mult: 1
   }
+  # learning rate and decay multipliers for the biases
   param {
     lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
-    num_output: 96
-    kernel_size: 11
-    stride: 4
+    num_output: 96      # learn 96 filters
+    kernel_size: 11     # each filter is 11x11
+    stride: 4           # step 4 pixels between each filter application
     weight_filler {
-      type: "gaussian"
+      type: "gaussian"  # initialize the filters from a Gaussian
       std: 0.01
     }
     bias_filler {
-      type: "constant"
+      type: "constant"  # initialize the biases to zero (0)
       value: 0
     }
   }
@@ -72,13 +74,19 @@ layer {
 }
 layer {
   name: "norm1"
+  # The local response normalization layer performs a kind of “lateral inhibition” by normalizing over local input regions.
   type: "LRN"
   bottom: "conv1"
   top: "norm1"
   lrn_param {
+    # the number of channels to sum over (for cross channel LRN) 
+    # or the side length of the square region to sum over (for within channel LRN)
     local_size: 5
     alpha: 0.0001
     beta: 0.75
+    # norm_region [default ACROSS_CHANNELS]: 
+    # whether to sum over adjacent channels (ACROSS_CHANNELS) 
+    # or nearby spatial locaitons (WITHIN_CHANNEL)
   }
 }
 layer {
@@ -109,7 +117,11 @@ layer {
     num_output: 256
     pad: 2
     kernel_size: 5
-    group: 2
+    # group (g) [default 1]: 
+    # If g > 1, we restrict the connectivity of each filter to a subset of the input. 
+    # Specifically, the input and output channels are separated into g groups
+    # , and the ith output group channels will be only connected to the ith input group channels.
+    group: 2        
     weight_filler {
       type: "gaussian"
       std: 0.01

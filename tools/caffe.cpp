@@ -39,7 +39,8 @@ DEFINE_string(weights, "",
     "Optional; the pretrained weights to initialize finetuning, "
     "separated by ','. Cannot be set simultaneously with snapshot.");
 DEFINE_int32(iterations, 50,
-    "The number of iterations to run.");
+    "The number of iterations to run. "
+    "jxion: if the batch size for test phase is 50, then (iterations * 50) images will be validated in total.");
 DEFINE_string(sigint_effect, "stop",
              "Optional; action to take when a SIGINT signal is received: "
               "snapshot, stop or none.");
@@ -234,9 +235,12 @@ int test() {
     LOG(INFO) << "Use CPU.";
     Caffe::set_mode(Caffe::CPU);
   }
-  // Instantiate the caffe net.
+
+  LOG(INFO) << "Instantiate and init the caffe net ...";
   Net<float> caffe_net(FLAGS_model, caffe::TEST);
   caffe_net.CopyTrainedLayersFrom(FLAGS_weights);
+  LOG(INFO) << "Instantiate and init the caffe net DONE.";
+  
   LOG(INFO) << "Running for " << FLAGS_iterations << " iterations.";
 
   vector<Blob<float>* > bottom_vec;
@@ -249,6 +253,7 @@ int test() {
         caffe_net.Forward(bottom_vec, &iter_loss);
     loss += iter_loss;
     int idx = 0;
+	LOG(INFO) << "Batch " << i << ", result.size() = " << result.size() << ", result[0]->count() = " << result[0]->count();
     for (int j = 0; j < result.size(); ++j) {
       const float* result_vec = result[j]->cpu_data();
       for (int k = 0; k < result[j]->count(); ++k, ++idx) {
