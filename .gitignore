@@ -61,6 +61,8 @@
 # 2. custom, and live on their own unless they're deliberated contributed
 data/*
 !data/ilsvrc12
+data/ilsvrc12/dogs05_val/
+data/ilsvrc12/dogs_train/
 data/ilsvrc12/._*
 models/*
 *.caffemodel

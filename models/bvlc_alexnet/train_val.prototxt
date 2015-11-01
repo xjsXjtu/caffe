@@ -10,11 +10,11 @@ layer {
   transform_param {
     mirror: true
     crop_size: 227
-    mean_file: "data/ilsvrc12/imagenet_mean.binaryproto"
+    mean_file: "examples/imagenet/dogs05_imagenet_mean_train.binaryproto"
   }
   data_param {
-    source: "examples/imagenet/ilsvrc12_train_lmdb"
-    batch_size: 256
+    source: "examples/imagenet/dogs05_ilsvrc12_train_lmdb"
+    batch_size: 128
     backend: LMDB
   }
 }
@@ -29,14 +29,32 @@ layer {
   transform_param {
     mirror: false
     crop_size: 227
-    mean_file: "data/ilsvrc12/imagenet_mean.binaryproto"
+    mean_file: "examples/imagenet/dogs05_imagenet_mean_val.binaryproto"
   }
   data_param {
-    source: "examples/imagenet/ilsvrc12_val_lmdb"
-    batch_size: 50
+    source: "examples/imagenet/dogs05_ilsvrc12_val_lmdb"
+    batch_size: 32
     backend: LMDB
   }
 }
+# layer {
+#   name: "imagedata"
+#   type: "ImageData"
+#   top: "data"
+#   top: "label"
+#   include {
+#     phase: TEST
+#   }
+#   transform_param {
+#     mirror: false
+#   }
+#   image_data_param {
+#     source: "examples/imagenet/ilsvrc12_val.txt"
+#     batch_size: 2
+#     new_height: 256
+#     new_width: 256
+#   }
+# }
 layer {
   name: "conv1"
   type: "Convolution"

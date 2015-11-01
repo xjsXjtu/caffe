@@ -1,0 +1,16 @@
+n02085936 Maltese dog, Maltese terrier, Maltese
+n02097474 Tibetan terrier, chrysanthemum dog
+n02105641 Old English sheepdog, bobtail
+n02105855 Shetland sheepdog, Shetland sheep dog, Shetland
+n02106662 German shepherd, German shepherd dog, German police dog, alsatian
+n02107574 Greater Swiss Mountain dog
+n02107683 Bernese mountain dog
+n02108915 French bulldog
+n02109961 Eskimo dog, husky
+n02110341 dalmatian, coach dog, carriage dog
+n02110627 affenpinscher, monkey pinscher, monkey dog
+n02110958 pug, pug-dog
+n02111277 Newfoundland, Newfoundland dog
+n02116738 African hunting dog, hyena dog, Cape hunting dog, Lycaon pictus
+n03218198 dogsled, dog sled, dog sleigh
+n07697537 hotdog, hot dog, red hot

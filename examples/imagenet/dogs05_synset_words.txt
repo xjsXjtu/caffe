@@ -1,0 +1,5 @@
+n02085936 Maltese dog, Maltese terrier, Maltese                             153
+n02097474 Tibetan terrier, chrysanthemum dog                                200
+n02105641 Old English sheepdog, bobtail                                     229
+n02105855 Shetland sheepdog, Shetland sheep dog, Shetland                   230
+n02106662 German shepherd, German shepherd dog, German police dog, alsatian 235

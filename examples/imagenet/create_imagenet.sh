@@ -12,10 +12,10 @@ fi
 
 EXAMPLE=examples/imagenet
 DATA=data/ilsvrc12
-TOOLS=build/tools
+TOOLS=.build_release/tools
 
-TRAIN_DATA_ROOT=/mnt/hgfs/ILSVRC2012/ILSVRC2012_img_train/
-VAL_DATA_ROOT=/mnt/hgfs/ILSVRC2012/ILSVRC2012_img_val/
+TRAIN_DATA_ROOT=/home/jxion/git_caffe/data/ilsvrc12/dogs_train/
+VAL_DATA_ROOT=/home/jxion/git_caffe/data/ilsvrc12/dogs05_val/
 
 # Set RESIZE=true to resize the images to 256x256. Leave as false if images have
 # already been resized using another tool.
@@ -44,28 +44,28 @@ fi
 
 
 if [ $1 -eq 1 ]; then
-    echo "Creating train lmdb..."
+    echo "Creating dogs05 train lmdb..."
 
     GLOG_logtostderr=1 $TOOLS/convert_imageset \
         --resize_height=$RESIZE_HEIGHT \
         --resize_width=$RESIZE_WIDTH \
         --shuffle \
         $TRAIN_DATA_ROOT \
-        $DATA/train.txt \
-        $EXAMPLE/ilsvrc12_train_lmdb
+        $EXAMPLE/dogs05_train.txt \
+        $EXAMPLE/dogs05_ilsvrc12_train_lmdb
 fi
 
 
 if [ $1 -eq 2 ]; then
-    echo "Creating val lmdb..."
+    echo "Creating dogs05 val lmdb..."
 
     GLOG_logtostderr=1 $TOOLS/convert_imageset \
         --resize_height=$RESIZE_HEIGHT \
         --resize_width=$RESIZE_WIDTH \
         --shuffle \
         $VAL_DATA_ROOT \
-        $DATA/val.txt \
-        $EXAMPLE/ilsvrc12_val_lmdb
+        $EXAMPLE/dogs05_val.txt \
+        $EXAMPLE/dogs05_ilsvrc12_val_lmdb
 fi
 
 echo "Done."
